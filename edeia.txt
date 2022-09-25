@@ -1,0 +1,29 @@
+- cadastro de funcionarios
+- listagem de funcionarios
+- remoção de funcionarios
+
+
+tela 1
+- Tela de cadastro de um funcionário
+(dados a serem armazenados)
+- Nome (importante)
+- Email (não importante)
+- CPF (importante)
+- Endereço (não importante)
+- telefone (importante)
+
+- tela 2
+- Tela de listagem dos funcionários
+- vai mostrar todos os funcionários que foram cadastrados
+- vai permitir remover um funcionário da lista
+- vai permitir adicionar um novo funcionário( Retorna pra tela 1)
+
+BASE DE DADOS ----------------------------
+
+(tabela funcionário)
+- id (primary key)
+- nome (not null)
+- email
+- CPF (unique, not null)
+- Enderço 
+- Telefone (not null)
