@@ -49,18 +49,29 @@ app.get("/dadosFuncionarios", async (req, res)=>{
     res.json(data)
 })
 app.post("/atualizar", async (req, res)=>{
-    const func = {
-        nome: req.body.nome,
-        sobrenome: req.body.sobrenome,
-        cpf: req.body.cpf,
-        email: req.body.email,
-        bairro: req.body.bairro,
-        rua: req.body.rua,
-        numeroCasa: req.body.numeroCasa
+    let response = await fetch("http://localhost:8080/dadosFuncionarios")
+    let conv = await response.json()
+    for(let k = 0; k<conv.data.length; k++){
+        if(conv.data[k].nome == req.body.nome){
+
+            const email = conv.data[k].email
+            const func = {
+                nome: req.body.nome,
+                sobrenome: req.body.sobrenome,
+                cpf: req.body.cpf,
+                email: email,
+                bairro: req.body.bairro,
+                rua: req.body.rua,
+                numeroCasa: req.body.numeroCasa
+            }
+            const funcionario = new Funcionario()
+            console.log(func)
+            funcionario.atualizar(func)
+            res.redirect('/');
+        }
     }
-    const funcionario = new Funcionario()
-    funcionario.atualizar(func)
-    res.redirect('/');
+   
+   
 })
 
 app.listen(8080, console.log("Rodando..."))
