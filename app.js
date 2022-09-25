@@ -7,11 +7,15 @@ const app = express()
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 //Definindo onde os arquivos estaticos vão ficar
-app.use(express.static(path.join(__dirname, "views")))
+app.use(express.static(path.join(__dirname, "views")))              
 //Definindo a rota raiz
 app.get("/", (req, res)=>{
-    res.sendFile(path.join(__dirname, "views/cadastroFuncionario.html"))
+    res.sendFile(path.join(__dirname, "views/listaFuncionarios.html"))
 })
+app.get("/atualizarCadastro/:nome", async (req, res)=>{
+    res.sendFile(path.join(__dirname, "views/atualizar.html"))
+})
+//rota post
 app.post("/funcionarios",async (req, res)=>{
     const func = {
         nome: req.body.nome,
@@ -24,9 +28,11 @@ app.post("/funcionarios",async (req, res)=>{
         telefone: req.body.telefone
     }
     const funcionario = new Funcionario()
-   await funcionario.cadastrar(func)
-   await  getDadosFuncionarios(funcionario)
-    res.sendFile(path.join(__dirname, "/views/listaFuncionarios.html")) 
+    await funcionario.cadastrar(func)
+    res.redirect('/');
+})
+app.get("/cadastroFuncionario", (req, res)=>{
+    res.sendFile(path.join(__dirname, "./views/cadastroFuncionario.html"))
 })
 app.get("/removerFuncionario/:nome", async (req, res)=>{
     const funcionario = new Funcionario()
@@ -35,14 +41,26 @@ app.get("/removerFuncionario/:nome", async (req, res)=>{
     res.send("Usuario apagado")
 
 })
-function getDadosFuncionarios(funcionario){
-   app.get("/dadosFuncionarios", async (req, res)=>{
+app.get("/dadosFuncionarios", async (req, res)=>{
+    const funcionario =new  Funcionario()
     const data = {
         data: await funcionario.mostrar()
     }
-    console.log(data)
-    return res.json(data)
-   })
-}
+    res.json(data)
+})
+app.post("/atualizar", async (req, res)=>{
+    const func = {
+        nome: req.body.nome,
+        sobrenome: req.body.sobrenome,
+        cpf: req.body.cpf,
+        email: req.body.email,
+        bairro: req.body.bairro,
+        rua: req.body.rua,
+        numeroCasa: req.body.numeroCasa
+    }
+    const funcionario = new Funcionario()
+    funcionario.atualizar(func)
+    res.redirect('/');
+})
 
 app.listen(8080, console.log("Rodando..."))

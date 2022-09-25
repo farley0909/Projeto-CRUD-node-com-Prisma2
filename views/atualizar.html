@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Cadastro</title>
+    <link rel="shortcut icon" href="/views/images/registro.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+   <style>
+        .container h1{
+            text-align: center;
+            font-weight:300;
+            margin-bottom: 4%;
+            margin-top: 4%;
+        }
+        .container{
+            padding: 40px;
+            max-width: 60%;
+        }
+        .space-bottom{
+         margin-bottom: 2%;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Atualizar Cadastro</h1>
+        <form action="/atualizar" method="post">
+            <div class="row g-3 space-bottom">
+                <div class="col">
+                    <label name="nome" class="form-label">Nome</label>
+                  <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome">
+                </div>
+                <div class="col">
+                    <label for="CPF" class="form-label">Sobrenome</label>
+                  <input type="text" class="form-control" name="sobrenome" id="sobrenome" placeholder="Sobrenome">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="CPF" class="form-label">CPF</label>
+                <input type="text" name="cpf" id="cpf" class="form-control"placeholder="000.000.000.00">
+            </div>
+            <div class="mb-3">
+                <label for="Email" class="form-label">Email</label>
+                <input disabled=""type="email" name="email" id="email" class="form-control" placeholder="teste@funcionario.com">
+            </div>
+            <div class="row g-3 space-bottom">
+                <div class="col">
+                    <label for="rua" class="form-label">Rua</label>
+                     <input type="text" name="rua" id="rua" class="form-control" placeholder="Rua 9 de julho">
+                </div>
+                <div class="col">
+                    <label for="bairro" class="form-label">Bairro</label>
+                  <input type="text" name="bairro" id="bairro" class="form-control" placeholder="Ibirapuera">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="numCasa" class="form-label">Numero da casa</label>
+                <input type="number" name="numCasa" id="numCasa" class="form-control" placeholder="122">
+            </div>
+            <div class="mb-3">
+                <label for="Telefone" class="form-label">Telefone</label>
+                <input type="text" name="telefone" id="telefone" class="form-control" placeholder="(00) 9 9999 - 9999" >
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+    
+    <script>
+        let path = location.pathname
+        let nome = path.split("/")
+        nome = nome[2]
+        async function getDados(nome){
+            let response = await fetch("http://localhost:8080/dadosFuncionarios")
+            let conv = await response.json()
+      
+            for(let k = 0; k<conv.data.length; k++){
+                if(conv.data[k].nome == nome){
+                    let nome = document.getElementById("nome").value=""+conv.data[k].nome
+                    let sobrenome = document.getElementById("sobrenome").value=""+conv.data[k].sobrenome
+                    let cpf = document.getElementById("cpf").value=""+conv.data[k].cpf
+                    let telefone = document.getElementById("telefone").value=""+conv.data[k].telefone
+                    let email = document.getElementById("email").value=""+conv.data[k].email
+                    let rua = document.getElementById("rua").value=""+conv.data[k].rua
+                    let bairro = document.getElementById("bairro").value=""+conv.data[k].bairro
+                    let numCasa = document.getElementById("numCasa").value=""+conv.data[k].numeroCasa
+                }
+            }
+            
+        }
+        getDados(nome)
+    </script>
+</body>
+</html>

@@ -47,6 +47,23 @@ module.exports = class Funcionario{
     })
     console.log("Esse usuário foi deletado", remove)
    }
+
+   async atualizar(func: any){
+    const atualizar = await prisma.funcionario.update({
+      where: { email: func.email },
+      data: { 
+        nome: func.nome,
+        sobrenome: func.sobrenome,
+        cpf: func.cpf,
+        numeroCasa: func.numeroCasa,
+        bairro: func.bairro,
+        rua: func.rua,
+      
+      }
+    })
+    console.log("atualizado: ", atualizar)
+   }
+   
     
     /*main()
    

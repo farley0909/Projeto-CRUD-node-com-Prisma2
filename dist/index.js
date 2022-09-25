@@ -126,6 +126,30 @@ module.exports = /** @class */ (function () {
             });
         });
     };
+    Funcionario.prototype.atualizar = function (func) {
+        return __awaiter(this, void 0, void 0, function () {
+            var atualizar;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, prisma.funcionario.update({
+                            where: { email: func.email },
+                            data: {
+                                nome: func.nome,
+                                sobrenome: func.sobrenome,
+                                cpf: func.cpf,
+                                numeroCasa: func.numeroCasa,
+                                bairro: func.bairro,
+                                rua: func.rua
+                            }
+                        })];
+                    case 1:
+                        atualizar = _a.sent();
+                        console.log("atualizado: ", atualizar);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     return Funcionario;
 }());
 //# sourceMappingURL=index.js.map

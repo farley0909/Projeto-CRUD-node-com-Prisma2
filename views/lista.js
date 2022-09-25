@@ -39,6 +39,26 @@ async function getFuncionarios(){
         liEmail.className="list-group-item"
         liEmail.innerHTML="<strong>Email: </strong>"+ conv.data[k].email
         ulDados.appendChild(liEmail)
+        ///////////////////////////////////
+        let liTelefone = document.createElement("li")
+        liTelefone.className="list-group-item"
+        liTelefone.innerHTML="<strong>Telefone: </strong>"+ conv.data[k].telefone
+        ulDados.appendChild(liTelefone)
+        ////////////////////////////////////////
+        let liRua = document.createElement("li")
+        liRua.className="list-group-item"
+        liRua.innerHTML="<strong>Rua: </strong>"+ conv.data[k].rua
+        ulDados.appendChild(liRua)
+        //////////////////////////////////////////////////
+        let liBairro = document.createElement("li")
+        liBairro.className="list-group-item"
+        liBairro.innerHTML="<strong>Bairro: </strong>"+ conv.data[k].bairro
+        ulDados.appendChild(liBairro)
+        ////////////////////////////////////
+        let liNumeroCasa = document.createElement("li")
+        liNumeroCasa.className="list-group-item"
+        liNumeroCasa.innerHTML="<strong>Némuro da casa: </strong>"+ conv.data[k].numeroCasa
+        ulDados.appendChild(liNumeroCasa)
          //quando clicado um li vai pegar todos os lis da pagina
          let ul = document.getElementById("listaFuncionarios")
          let lis = ul.childNodes
@@ -87,5 +107,24 @@ btnRemover.addEventListener("click", async ()=>{
    }
    let dados = document.getElementById("dadosFuncionarios").style.display="none"
    getFuncionarios()
+})
+///////////////////////////////////////////////////////
+
+
+
+let btnCadastrar = document.getElementById("cadastrar")
+btnCadastrar.addEventListener("click", ()=>{
+   location.href="http://localhost:8080/cadastroFuncionario"
+})
+let btnAtualizar = document.getElementById("atualizar")
+btnAtualizar.addEventListener("click", ()=>{
+   let lis = document.getElementsByTagName("li")
+   for(let k=0; k<lis.length;k++){
+      if(lis[k].style.color=="white"){
+         let nome = lis[k].innerHTML
+         location.href=`http://localhost:8080/atualizarCadastro/${nome}`
+      }
+   
+   }
 })
 
