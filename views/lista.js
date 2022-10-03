@@ -57,7 +57,7 @@ async function getFuncionarios(){
         ////////////////////////////////////
         let liNumeroCasa = document.createElement("li")
         liNumeroCasa.className="list-group-item"
-        liNumeroCasa.innerHTML="<strong>Némuro da casa: </strong>"+ conv.data[k].numeroCasa
+        liNumeroCasa.innerHTML="<strong>Número da casa: </strong>"+ conv.data[k].numeroCasa
         ulDados.appendChild(liNumeroCasa)
          //quando clicado um li vai pegar todos os lis da pagina
          let ul = document.getElementById("listaFuncionarios")
