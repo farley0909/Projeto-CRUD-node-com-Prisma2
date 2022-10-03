@@ -91,8 +91,8 @@ btnRemover.addEventListener("click", async ()=>{
    let lis = document.getElementsByTagName("li")
    for(let k=0; k<lis.length;k++){
       if(lis[k].style.color=="white"){
-         let nome = lis[k].innerHTML
-         const req = await fetch(`http://localhost:8080/removerFuncionario/${nome}`);
+         let data = await getDados(lis[k].innerHTML)
+         const req = await fetch(`http://localhost:8080/removerFuncionario/${data.cpf}`);
          alert("Funcionário apagado")
       }
    
@@ -116,15 +116,33 @@ let btnCadastrar = document.getElementById("cadastrar")
 btnCadastrar.addEventListener("click", ()=>{
    location.href="http://localhost:8080/cadastroFuncionario"
 })
+
 let btnAtualizar = document.getElementById("atualizar")
-btnAtualizar.addEventListener("click", ()=>{
+async function getDados(nome){
+   let response = await fetch("http://localhost:8080/dadosFuncionarios")
+   let conv = await response.json()
+   for(let k = 0; k<conv.data.length; k++){
+       if(conv.data[k].nome == nome){
+          data = {
+            nome: await conv.data[k].nome,
+            sobrenome: await conv.data[k].sobrenome,
+            sobrenome: await conv.data[k].sobrenome,
+            cpf: await conv.data[k].cpf,
+            email: await conv.data[k].email
+         }
+         return data
+   }
+}
+}
+btnAtualizar.addEventListener("click", async ()=>{
    let lis = document.getElementsByTagName("li")
    for(let k=0; k<lis.length;k++){
       if(lis[k].style.color=="white"){
-         let nome = lis[k].innerHTML
-         location.href=`http://localhost:8080/atualizarCadastro/${nome}`
+         let data = await getDados(lis[k].innerHTML)
+         location.href=`http://localhost:8080/atualizarCadastro/${data.cpf}`
       }
-   
+      
    }
 })
+
 
