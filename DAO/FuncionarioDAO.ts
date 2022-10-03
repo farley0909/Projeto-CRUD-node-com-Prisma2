@@ -29,6 +29,7 @@ module.exports = class Funcionario{
     const { PrismaClient } = require('@prisma/client')
     const prisma = new PrismaClient()
     const funcionarios = await prisma.funcionario.findMany()
+    await prisma.$disconnect()
     return funcionarios
     
   }
@@ -46,6 +47,7 @@ module.exports = class Funcionario{
         cpf:funcionarios[0].cpf
       }
     })
+    await prisma.$disconnect()
    }
 
    async atualizar(func: any){
@@ -63,6 +65,7 @@ module.exports = class Funcionario{
       
       }
     })
+    await prisma.$disconnect()
    }
    
     

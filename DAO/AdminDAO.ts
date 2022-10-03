@@ -15,6 +15,7 @@ module.exports=class AdminDAO{
                 usuario:this.usuario
             }
         })
+        await prisma.$disconnect()
         return result;
     }
     get getSenha(){

@@ -27,6 +27,7 @@ module.exports = class Funcionario {
         const { PrismaClient } = require('@prisma/client');
         const prisma = new PrismaClient();
         const funcionarios = await prisma.funcionario.findMany();
+        await prisma.$disconnect();
         return funcionarios;
     }
     //Método que vai receber um cpf e então vai deletar o usuário do banco
@@ -43,6 +44,7 @@ module.exports = class Funcionario {
                 cpf: funcionarios[0].cpf
             }
         });
+        await prisma.$disconnect();
     }
     async atualizar(func) {
         const { PrismaClient } = require('@prisma/client');
@@ -58,6 +60,7 @@ module.exports = class Funcionario {
                 rua: func.rua,
             }
         });
+        await prisma.$disconnect();
     }
 };
 //# sourceMappingURL=FuncionarioDAO.js.map
