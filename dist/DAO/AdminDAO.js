@@ -1,6 +1,7 @@
 "use strict";
 module.exports = class AdminDAO {
     constructor(usuario, senha) {
+        this.jwt = require('jsonwebtoken');
         this.senha = senha;
         this.usuario = usuario;
     }
@@ -20,6 +21,14 @@ module.exports = class AdminDAO {
     }
     get getUsuario() {
         return this.usuario;
+    }
+    async criarToken() {
+        const res = await this.buscarDados();
+        const payload = {
+            id: res[0].id
+        };
+        const token = this.jwt.sign(payload, 'gutz');
+        return token;
     }
 };
 //# sourceMappingURL=AdminDAO.js.map

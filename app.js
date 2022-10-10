@@ -17,16 +17,20 @@ app.get("/", (req, res)=>{
     res.sendFile(path.join(__dirname, "views/login.html"))
 })
 app.post("/login", async (req, res)=>{
-    const result = new admDAO(req.body.usuario, req.body.senha)
+    const {usuario, senha}=req.body
+    const result = new admDAO(usuario, senha)
+    console.log(req.body.usuario, req.body.senha)
     const dados = await result.buscarDados()
     try {
-        await bcrypt.compare(result.getSenha, dados[0].senha, (err, response)=>{
+        await bcrypt.compare(result.getSenha, dados[0].senha, async (err, response)=>{
             if(err){
                 console.log("erro na função")
             }
             if(response){
-                res.redirect("/inicio")
-            }else{
+                const token = await result.criarToken()
+                res.set('Authorization', token)
+                res.redirect('/inicio')         
+               }else{
                 res.redirect('/')
             }
         })

@@ -6,6 +6,7 @@
       "target": "ES2018",
       "lib": ["esnext"],
       "esModuleInterop": true,
+     
     },
-    "include": ["./DAO", "./Model"]
+    "include": ["./DAO", "./Model", "./util"]
   }
