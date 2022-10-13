@@ -29,7 +29,7 @@
 <body>
     <div class="container">
         <h1>Atualizar Cadastro</h1>
-        <form action="/atualizar" method="post">
+        <form id="formAtualizar" method="post">
             <div class="row g-3 space-bottom">
                 <div class="col">
                     <label name="nome" class="form-label">Nome</label>
@@ -75,8 +75,13 @@
         let patheSeparado = path.split("/")
         cpf = patheSeparado[2]
         console.log(cpf)
+        let token = localStorage.getItem('token')
+       let form =  document.getElementById("formAtualizar")
+       
+       form.action="/atualizar/"+token
         async function getDados(cpf){
-            let response = await fetch("http://localhost:8080/dadosFuncionarios")
+            
+            let response = await fetch("http://localhost:8080/dadosFuncionarios/"+token)
             let conv = await response.json()
             for(let k = 0; k<conv.data.length; k++){
                 if(conv.data[k].cpf == cpf){
