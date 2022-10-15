@@ -30,12 +30,15 @@
         margin-bottom: 6%;
         font-weight: 300;
        }
+       #loading{
+        display: inline;
+       }
     </style>
 </head>
 <body>
     <main>
         <div class="container">
-            <form id="formLogin">
+            <form id="formLogin" action="/login" method="post">
                 <h1 class="text-center">Faça login</h1>
                 <label name="usuario" class="form-label">
                     Usuário
@@ -43,8 +46,10 @@
                 <input class="form-control" type="text" id="usuario" name="usuario">
                 <label name="Senha" class="form-label ">Senha</label>
                 <input class="form-control" type="password" name="senha" id="senha">
-                <button id="entrar" type="button" class="btn btn-primary">Entrar</button>
+                <button id="entrar" type="submit" class="btn btn-primary">
+                    Entrar</button>
             </form>
+          
         </div>
     </main>
     <script src="./login.js
