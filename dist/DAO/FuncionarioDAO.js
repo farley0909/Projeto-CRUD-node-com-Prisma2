@@ -1,10 +1,18 @@
 "use strict";
 module.exports = class Funcionario {
+    constructor() {
+        this.prisma = require('./factory');
+        /*main()
+       
+        .catch(async (e) => {
+          console.error(e)
+          await prisma.$disconnect()
+          process.exit(1)
+        })*/
+    }
     //Método para o cadastro dos funcionários
     async cadastrar(func) {
-        const { PrismaClient } = require('@prisma/client');
-        const prisma = new PrismaClient();
-        await prisma.funcionario.create({
+        await this.prisma.funcionario.create({
             data: {
                 nome: func.nome,
                 sobrenome: func.sobrenome,
@@ -15,52 +23,42 @@ module.exports = class Funcionario {
                 telefone: func.telefone,
                 numeroCasa: func.numeroCasa
             }
-        }).then(async () => {
-            await prisma.$disconnect();
-        }).catch(async () => {
-            await prisma.$disconnect();
-            process.exit(1);
         });
+        await this.prisma.$disconnect();
     }
     //Método que vai retornar um array com os funcionários cadastrados
     async mostrar() {
-        const { PrismaClient } = require('@prisma/client');
-        const prisma = new PrismaClient();
-        const funcionarios = await prisma.funcionario.findMany();
-        await prisma.$disconnect();
+        const funcionarios = await this.prisma.funcionario.findMany();
+        await this.prisma.$disconnect();
         return funcionarios;
     }
     //Método que vai receber um cpf e então vai deletar o usuário do banco
     async remover(cpf) {
-        const { PrismaClient } = require('@prisma/client');
-        const prisma = new PrismaClient();
-        const funcionarios = await prisma.funcionario.findMany({
+        const funcionarios = await this.prisma.funcionario.findMany({
             where: {
                 cpf: cpf
             }
         });
-        const remove = await prisma.funcionario.delete({
+        const remove = await this.prisma.funcionario.delete({
             where: {
                 cpf: funcionarios[0].cpf
             }
         });
-        await prisma.$disconnect();
+        await this.prisma.$disconnect();
     }
     async atualizar(func) {
-        const { PrismaClient } = require('@prisma/client');
-        const prisma = new PrismaClient();
-        const atualizar = await prisma.funcionario.update({
-            where: { email: func.email },
+        const atualizar = await this.prisma.funcionario.update({
+            where: { cpf: func.cpf },
             data: {
                 nome: func.nome,
                 sobrenome: func.sobrenome,
-                cpf: func.cpf,
+                email: func.email,
                 numeroCasa: func.numeroCasa,
                 bairro: func.bairro,
                 rua: func.rua,
             }
         });
-        await prisma.$disconnect();
+        await this.prisma.$disconnect();
     }
 };
 //# sourceMappingURL=FuncionarioDAO.js.map

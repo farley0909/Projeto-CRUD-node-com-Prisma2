@@ -16,7 +16,7 @@ const app = express()
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 //Definindo onde os arquivos estaticos vão ficar
-app.use(express.static(path.join(__dirname, "/views")))              
+app.use(express.static(path.join(__dirname, '/views')))              
 //Rotas
 app.use(home)
 app.use(login)

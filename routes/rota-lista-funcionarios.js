@@ -10,6 +10,8 @@ router.get("/inicio/:token", (req, res)=>{
         if(!(req.params.token)){
             throw new Error("Parametro faltando")
         }
+        //res.render(path.join(__dirname, "../views/listaFuncionarios.html"))
+      
         res.sendFile(path.join(__dirname, "../views/listaFuncionarios.html"))
     }catch (error) {
         console.log(error)

@@ -27,7 +27,7 @@ module.exports = class AdminDAO {
         const payload = {
             id: res[0].id
         };
-        const token = this.jwt.sign(payload, 'gutz');
+        const token = this.jwt.sign(payload, process.env.JWT_SECRET);
         return token;
     }
 };

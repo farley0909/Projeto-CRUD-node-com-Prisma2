@@ -4,6 +4,8 @@ const router = express.Router()
 const bodyParser = require("body-parser")
 const admDAO = require('../dist/DAO/AdminDAO.js')
 const bcrypt = require('bcrypt')
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 //const validaUsuario = require('../util/validaUsuario.js')
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
@@ -23,9 +25,11 @@ router.post("/login", async (req, res)=>{
                 res.set({
                     'Authorization': token
                   })
+                
                 res.redirect("/inicio/"+token)
             }else{
                 console.log('caiu aqui')
+                res.cookie('hasError', 'true');
                 res.redirect('/')
             }
         })

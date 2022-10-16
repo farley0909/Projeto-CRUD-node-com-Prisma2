@@ -17,7 +17,7 @@ model Funcionario {
   bairro     String?
   numeroCasa String?
   telefone   String
-  email      String  @unique
+  email      String  
 }
 model Admin{
    id         Int     @id @default(autoincrement())
