@@ -4,7 +4,6 @@ const router = express.Router()
 const bodyParser = require("body-parser")
 const admDAO = require('../dist/DAO/AdminDAO.js')
 const bcrypt = require('bcrypt')
-const cors = require('cors')
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 //const validaUsuario = require('../util/validaUsuario.js')
