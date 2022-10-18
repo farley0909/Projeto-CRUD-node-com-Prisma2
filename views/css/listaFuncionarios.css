@@ -1,0 +1,30 @@
+body{
+    display: flex;
+    flex-direction: row;
+}
+.container{
+    text-align: center;
+    margin-top: 4%;
+    max-width: 600px;
+  
+}
+.container h1{
+    font-weight: 300;
+}
+.list-group{
+cursor: pointer;
+text-align: center;
+margin-bottom: 20px;
+}
+#dadosFuncionarios{
+width: 500px;
+height: 300px;
+align-self: start;
+border-left: 1px solid black;
+display: none;
+}
+#dadosFunc li{
+width: 80%;
+font-size: 14pt;
+text-align: justify;
+}
