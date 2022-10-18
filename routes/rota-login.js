@@ -10,7 +10,6 @@ app.use(cookieParser());
 //const validaUsuario = require('../util/validaUsuario.js')
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
-app.use(cors())
 
 router.post("/login", async (req, res)=>{
     const {usuario, senha}=req.body

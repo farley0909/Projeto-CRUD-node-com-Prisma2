@@ -1,6 +1,5 @@
 require('dotenv').config()
 const path = require("path")
-const cors = require('cors')
 const bodyParser = require("body-parser")
 const express = require("express")
 const login = require('./routes/rota-login.js') 
