@@ -10,6 +10,7 @@ router.get("/dadosFuncionarios/:token", async (req, res)=>{
         data: await funcionario.mostrar()
     }
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
     res.json(data)
 })
 module.exports = router
