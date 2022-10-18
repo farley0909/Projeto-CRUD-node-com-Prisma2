@@ -4,7 +4,7 @@ async function getFuncionarios(){
      //Vai começar fazendo uma requisição pra rota onde estão os dados dos funcionarios
      const token = localStorage.getItem('token');
      console.log("token: ", token)
-      const res = await fetch(`https://projeto-crud-node-com-prisma2.herokuapp.com/dadosFuncionarios/${token}`)
+      const res = await fetch(`http://localhost:8080/dadosFuncionarios/${token}`)
       const conv = await res.json()
       //vai percorrer o arry de dados dos funcionarios
       for(let k = 0; k<conv.data.length;k++){
