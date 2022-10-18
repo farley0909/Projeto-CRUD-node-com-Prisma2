@@ -9,7 +9,6 @@ router.get("/dadosFuncionarios/:token", async (req, res)=>{
     const data = {
         data: await funcionario.mostrar()
     }
-   
     res.json(data)
 })
 module.exports = router
