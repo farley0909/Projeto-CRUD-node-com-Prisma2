@@ -1,5 +1,6 @@
 require('dotenv').config()
 const path = require("path")
+const cors = require('cors')
 const bodyParser = require("body-parser")
 const express = require("express")
 const login = require('./routes/rota-login.js') 
@@ -13,6 +14,7 @@ const dadosFuncionarios = require('./routes/rota-dadosFuncionario.js')
 const atualizar = require('./routes/rota-atualizar.js') 
 const port = process.env.PORT || 8080
 const app = express()
+app.use(cors())
 //Configurando o bodyParser
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
